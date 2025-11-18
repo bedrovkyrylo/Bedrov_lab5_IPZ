@@ -1,0 +1,62 @@
+@startuml
+interface Visitor.NetworkVisitor {
+~ void visitCable(Cable)
+~ void visitServer(Server)
+~ void visitWorkstation(Workstation)
+~ void visitNetwork(Network)
+}
+
+class Visitor.Workstation {
+- String name
++ String getName()
++ void accept(NetworkVisitor)
+}
+
+
+class Visitor.CheckConnectionVisitor {
++ void visitCable(Cable)
++ void visitServer(Server)
++ void visitWorkstation(Workstation)
++ void visitNetwork(Network)
+}
+
+class Visitor.Main {
++ {static} void main(String[])
+}
+
+class Visitor.Cable {
+- String name
++ String getName()
++ void accept(NetworkVisitor)
+}
+
+
+interface Visitor.NetworkElement {
+~ void accept(NetworkVisitor)
+}
+
+class Visitor.Server {
+- String name
++ String getName()
++ void accept(NetworkVisitor)
+}
+
+
+class Visitor.Network {
+- String name
+- List<NetworkElement> children
++ String getName()
++ void addElement(NetworkElement)
++ List<NetworkElement> getChildren()
++ void accept(NetworkVisitor)
+}
+
+
+
+
+Visitor.NetworkElement <|.. Visitor.Workstation
+Visitor.NetworkVisitor <|.. Visitor.CheckConnectionVisitor
+Visitor.NetworkElement <|.. Visitor.Cable
+Visitor.NetworkElement <|.. Visitor.Server
+Visitor.NetworkElement <|.. Visitor.Network
+@enduml

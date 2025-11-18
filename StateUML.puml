@@ -1,0 +1,85 @@
+@startuml
+class State.Order {
+- OrderState newState
+- OrderState paidState
+- OrderState shippedState
+- OrderState deliveredState
+- OrderState cancelledState
+- OrderState currentState
++ void pay()
++ void ship()
++ void deliver()
++ void cancel()
++ void setState(OrderState)
++ OrderState getNewState()
++ OrderState getPaidState()
++ OrderState getShippedState()
++ OrderState getDeliveredState()
++ OrderState getCancelledState()
+}
+
+
+class State.DeliveredState {
+- Order order
++ void pay(Order)
++ void ship(Order)
++ void deliver(Order)
++ void cancel(Order)
+}
+
+
+class State.PaidState {
+- Order order
++ void pay(Order)
++ void ship(Order)
++ void deliver(Order)
++ void cancel(Order)
+}
+
+
+class State.CancelledState {
+- Order order
++ void pay(Order)
++ void ship(Order)
++ void deliver(Order)
++ void cancel(Order)
+}
+
+
+class State.NewState {
+- Order order
++ void pay(Order)
++ void ship(Order)
++ void deliver(Order)
++ void cancel(Order)
+}
+
+
+interface State.OrderState {
+~ void pay(Order)
+~ void ship(Order)
+~ void deliver(Order)
+~ void cancel(Order)
+}
+
+class State.ShippedState {
+- Order order
++ void pay(Order)
++ void ship(Order)
++ void deliver(Order)
++ void cancel(Order)
+}
+
+
+class State.MainS {
++ {static} void main(String[])
+}
+
+
+
+State.OrderState <|.. State.DeliveredState
+State.OrderState <|.. State.PaidState
+State.OrderState <|.. State.CancelledState
+State.OrderState <|.. State.NewState
+State.OrderState <|.. State.ShippedState
+@enduml
